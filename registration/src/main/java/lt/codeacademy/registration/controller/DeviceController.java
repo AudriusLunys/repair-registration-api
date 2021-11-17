@@ -23,13 +23,14 @@ public class DeviceController {
 
     private final DeviceService deviceService;
 
-    @GetMapping(value ="/device", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/device", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Get list of devices", httpMethod = "GET")
     public List<Device> getDeviceList() {
         return deviceService.findAll();
     }
 
-    @GetMapping("/device/{uuid}")
+    @GetMapping(value = "/device/{uuid}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ApiOperation(value = "Get device by UUID", httpMethod = "GET")
     public ResponseEntity<?> getDeviceById(@PathVariable UUID uuid) {
         Optional<Device> device = deviceService.findByUuid(uuid);
         return device.map(response -> ResponseEntity.ok().body(response)).orElse
