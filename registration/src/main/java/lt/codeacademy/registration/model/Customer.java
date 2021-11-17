@@ -1,6 +1,6 @@
 package lt.codeacademy.registration.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,12 +17,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "devices")
-public class Device {
+@Table(name = "customers")
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-  //  @JsonIgnore
+    //  @JsonIgnore
     private Long id;
 
     @NotNull
@@ -32,15 +32,15 @@ public class Device {
     private UUID uuid;
 
     @NotNull
-    private String manufacturer;
+    private String firstName;
 
     @NotNull
-    private String model;
+    private String lastName;
 
     @NotNull
-    private String serialNumber;
+    private String email;
 
     @NotNull
-    private String failureDescription;
+    private String telNumber;
 
 }
