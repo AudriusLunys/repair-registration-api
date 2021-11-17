@@ -1,5 +1,6 @@
 package lt.codeacademy.registration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class RepairOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //  @JsonIgnore
+    @JsonIgnore
     private Long id;
 
     @NotNull
