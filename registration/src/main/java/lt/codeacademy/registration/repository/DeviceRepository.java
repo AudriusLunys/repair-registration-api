@@ -8,6 +8,5 @@ import java.util.UUID;
 
 public interface DeviceRepository extends JpaRepository<Device, UUID> {
 
-    @Override
-    Optional<Device> findById(UUID uuid);
+    Optional<Device> findByUuid(UUID uuid);
 }
