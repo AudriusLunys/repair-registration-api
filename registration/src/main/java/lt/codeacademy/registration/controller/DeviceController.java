@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,13 +33,20 @@ public class DeviceController {
         Optional<Device> device = deviceService.findByUuid(uuid);
         return device.map(response -> ResponseEntity.ok().body(response)).orElse
                 (new ResponseEntity<>(HttpStatus.NOT_FOUND));
-
     }
 
     @PostMapping("/device")
     @ApiOperation(value = "Crate device", httpMethod = "POST")
-    public ResponseEntity<Void> createDevice(@RequestBody Device device) {
+    public ResponseEntity<Void> createDevice(@Valid @RequestBody Device device) {
         deviceService.saveDevice(device);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
+    @PutMapping("/device/{uuid}")
+    @ApiOperation(value = "Update device ", httpMethod = "PUT")
+    public ResponseEntity<Void> updateProduct(@PathVariable UUID uuid, @Valid @RequestBody Device device) {
+        deviceService.saveDevice(device);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
 }
