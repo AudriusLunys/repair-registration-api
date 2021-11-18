@@ -22,4 +22,8 @@ public class DeviceService {
     public Optional<Device> findByUuid(UUID uuid) {
         return deviceRepository.findByUuid(uuid);
     }
+
+    public Device saveDevice(Device device) {
+        return deviceRepository.save(device);
+    }
 }

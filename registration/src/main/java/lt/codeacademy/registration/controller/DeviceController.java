@@ -7,10 +7,7 @@ import lt.codeacademy.registration.service.DeviceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,5 +33,12 @@ public class DeviceController {
         return device.map(response -> ResponseEntity.ok().body(response)).orElse
                 (new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
+    }
+
+    @PostMapping("/device")
+    @ApiOperation(value = "Crate device", httpMethod = "POST")
+    public ResponseEntity<Void> createDevice(@RequestBody Device device) {
+        deviceService.saveDevice(device);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
