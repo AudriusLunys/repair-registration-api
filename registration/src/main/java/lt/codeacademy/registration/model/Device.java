@@ -27,9 +27,8 @@ public class Device {
 
     @NotNull
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Type(type = "uuid-char")
-    private UUID uuid;
+    private UUID uuid =  UUID.randomUUID();
 
     @NotNull
     private String manufacturer;
