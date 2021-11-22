@@ -36,7 +36,7 @@ public class DeviceController {
     }
 
     @PostMapping("/device")
-    @ApiOperation(value = "Crate device", httpMethod = "POST")
+    @ApiOperation(value = "Create device", httpMethod = "POST")
     public ResponseEntity<Void> createDevice(@Valid @RequestBody Device device) {
         deviceService.saveDevice(device);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -55,5 +55,4 @@ public class DeviceController {
         deviceService.deleteDevice(uuid);
         return ResponseEntity.ok().build();
     }
-
 }

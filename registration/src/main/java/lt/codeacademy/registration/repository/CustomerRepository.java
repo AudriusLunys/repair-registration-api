@@ -10,7 +10,8 @@ import java.util.UUID;
 
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
-    @Override
-    Optional<Customer> findById(UUID uuid);
+    Optional<Customer> findByUuid(UUID uuid);
+
+    void deleteByUuid (UUID uuid);
 
 }
