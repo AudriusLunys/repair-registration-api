@@ -12,3 +12,8 @@ INSERT INTO CUSTOMERS (uuid, first_name, last_name, email, tel_number) VALUES
 ('134018ac-bac2-4afe-8ac6-055612ba9d40', 'Inga', 'Ingaite', 'vd@gmail.com', '+3705865454'),
 ('144018ac-bac2-4afe-8ac6-055612ba9d40', 'Stasys', 'Stasiulis', 'trys@du.lt', '+370415454'),
 ('154018ac-bac2-4afe-8ac6-055612ba9d40', 'Jonas', 'Jonka', 'vis@yahoo.com', '+3705488454');
+
+INSERT INTO REPAIR_ORDERS(registration_nr, registration_date, repair_description, customer_id, device_id) VALUES
+(123456, '2019-03-01','profilaktika',5,2),
+(123478, '2021-12-11','screen repair',1,4),
+(123756, '2020-08-15','profilaktika',2,3);
