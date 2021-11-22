@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface DeviceRepository extends JpaRepository<Device, UUID> {
 
     Optional<Device> findByUuid(UUID uuid);
+
+    void deleteByUuid (UUID uuid);
 }

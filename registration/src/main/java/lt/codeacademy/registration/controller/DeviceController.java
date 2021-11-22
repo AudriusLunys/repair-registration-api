@@ -49,4 +49,11 @@ public class DeviceController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @DeleteMapping("/device/{uuid}")
+    @ApiOperation(value = "Delete device by UUID", httpMethod = "DELETE")
+    public ResponseEntity<?> deleteDevice(@PathVariable UUID uuid) {
+        deviceService.deleteDevice(uuid);
+        return ResponseEntity.ok().build();
+    }
+
 }
