@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 @Service
 public class OrderNumberGenerationService {
 
-    private Long generate (){
+    public Long generate (){
         LocalDateTime localDateTime = LocalDateTime.now();
         ZonedDateTime zdt = ZonedDateTime.of(localDateTime, ZoneId.systemDefault());
         Long date = zdt.toInstant().toEpochMilli();

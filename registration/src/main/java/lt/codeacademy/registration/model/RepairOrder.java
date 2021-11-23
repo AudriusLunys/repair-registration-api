@@ -1,17 +1,16 @@
 package lt.codeacademy.registration.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -34,9 +33,9 @@ public class RepairOrder {
 
     private String repairDescription;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private Device device;
 }

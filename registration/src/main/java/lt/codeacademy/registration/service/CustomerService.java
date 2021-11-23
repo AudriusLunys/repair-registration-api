@@ -2,7 +2,6 @@ package lt.codeacademy.registration.service;
 
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.registration.model.Customer;
-import lt.codeacademy.registration.model.Device;
 import lt.codeacademy.registration.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
