@@ -2,6 +2,7 @@ package lt.codeacademy.registration.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class Customer {
     @NotNull
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private UUID uuid = UUID.randomUUID();
 
     @NotNull

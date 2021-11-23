@@ -2,6 +2,7 @@ package lt.codeacademy.registration.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,9 +27,11 @@ public class RepairOrder {
     private Long id;
 
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long registrationNr;
 
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate registrationDate;
 
     private String repairDescription;
