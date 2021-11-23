@@ -27,7 +27,7 @@ public class RepairOrder {
     private Long id;
 
     @NotNull
-    private Long RegistrationNr;
+    private Long registrationNr;
 
     @NotNull
     private LocalDate registrationDate;
