@@ -39,21 +39,21 @@ class CustomerControllerTest {
     @Test
     void testCreateCustomer() throws Exception {
         Customer customer = new Customer();
-        customer.setLastName("Doe");
-        customer.setEmail("jane.doe@example.org");
+        customer.setLastName("Jonas");
+        customer.setEmail("jonas.jo@email.com");
         customer.setTelNumber("42");
         customer.setId(123L);
         customer.setUuid(UUID.randomUUID());
-        customer.setFirstName("Jane");
+        customer.setFirstName("Jo");
         when(this.customerService.saveCustomer((Customer) any())).thenReturn(customer);
 
         Customer customer1 = new Customer();
-        customer1.setLastName("Doe");
-        customer1.setEmail("jane.doe@example.org");
+        customer1.setLastName("Pavarde");
+        customer1.setEmail("pavarde.vardas@example.com");
         customer1.setTelNumber("42");
         customer1.setId(123L);
         customer1.setUuid(UUID.randomUUID());
-        customer1.setFirstName("Jane");
+        customer1.setFirstName("Vardas");
         String content = (new ObjectMapper()).writeValueAsString(customer1);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1/customer")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -80,7 +80,7 @@ class CustomerControllerTest {
         doNothing().when(this.customerService).deleteCustomer((UUID) any());
         MockHttpServletRequestBuilder deleteResult = MockMvcRequestBuilders.delete("/api/v1/customer/{uuid}",
                 UUID.randomUUID());
-        deleteResult.contentType("Not all who wander are lost");
+        deleteResult.contentType("something");
         MockMvcBuilders.standaloneSetup(this.customerController)
                 .build()
                 .perform(deleteResult)
@@ -114,7 +114,7 @@ class CustomerControllerTest {
     void testGetCustomerList2() throws Exception {
         when(this.customerService.findAll()).thenReturn(new ArrayList<Customer>());
         MockHttpServletRequestBuilder getResult = MockMvcRequestBuilders.get("/api/v1/customer");
-        getResult.contentType("Not all who wander are lost");
+        getResult.contentType("something something");
         MockMvcBuilders.standaloneSetup(this.customerController)
                 .build()
                 .perform(getResult)
@@ -126,18 +126,18 @@ class CustomerControllerTest {
     @Test
     void testUpdateCustomer() throws Exception {
         Customer customer = new Customer();
-        customer.setLastName("Doe");
-        customer.setEmail("jane.doe@example.org");
-        customer.setTelNumber("42");
+        customer.setLastName("Griffin");
+        customer.setEmail("peter.g@mail.com");
+        customer.setTelNumber("123456");
         customer.setId(123L);
         customer.setUuid(UUID.randomUUID());
-        customer.setFirstName("Jane");
+        customer.setFirstName("Peter");
         when(this.customerService.saveCustomer((Customer) any())).thenReturn(customer);
 
         Customer customer1 = new Customer();
-        customer1.setLastName("Doe");
-        customer1.setEmail("jane.doe@example.org");
-        customer1.setTelNumber("42");
+        customer1.setLastName("Griffin");
+        customer1.setEmail("jane.gr@example.com");
+        customer1.setTelNumber("42464");
         customer1.setId(123L);
         customer1.setUuid(UUID.randomUUID());
         customer1.setFirstName("Jane");
