@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Transactional
@@ -18,8 +19,7 @@ public class RepairOrderService {
 
     private final RepairOrderRepository repairOrderRepository;
     private final OrderNumberGenerationService generationService;
-    private final CustomerService customerService;
-    private final DeviceService deviceService;
+
 
     public List<RepairOrder> findAll() {
         return repairOrderRepository.findAll();
@@ -31,5 +31,9 @@ public class RepairOrderService {
         repairOrder.setRegistrationNr(generationService.generate());
         repairOrder.setRegistrationDate(LocalDate.now());
         return repairOrderRepository.save(repairOrder);
+    }
+
+    public void deleteOrder(Long registrationNr) {
+        repairOrderRepository.deleteByRegistrationNr(registrationNr);
     }
 }

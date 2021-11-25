@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
@@ -40,5 +41,12 @@ public class RepairOrderController {
     public ResponseEntity<Void> createRepairOrder(@Valid @RequestBody RepairOrder repairOrder) {
         repairOrderService.saveRepairOrder(repairOrder);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/order/{registrationNr}")
+    @ApiOperation(value = "Delete repair order by registration number", httpMethod = "DELETE")
+    public ResponseEntity<?> deleteDevice(@PathVariable Long registrationNr) {
+        repairOrderService.deleteOrder(registrationNr);
+        return ResponseEntity.ok().build();
     }
 }
