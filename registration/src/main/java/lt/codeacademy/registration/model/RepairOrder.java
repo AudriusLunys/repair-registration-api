@@ -34,8 +34,6 @@ public class RepairOrder {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate registrationDate;
 
-    private String repairDescription;
-
     @ManyToOne (cascade = CascadeType.ALL)
     private Customer customer;
 
