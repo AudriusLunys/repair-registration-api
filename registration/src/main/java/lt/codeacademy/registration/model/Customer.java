@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 @Getter
@@ -33,15 +34,19 @@ public class Customer {
     private UUID uuid = UUID.randomUUID();
 
     @NotNull
+    @NotBlank
     private String firstName;
 
     @NotNull
+    @NotBlank
     private String lastName;
 
     @NotNull
+    @NotBlank
     private String email;
 
     @NotNull
+    @NotBlank
     private String telNumber;
 
 }
