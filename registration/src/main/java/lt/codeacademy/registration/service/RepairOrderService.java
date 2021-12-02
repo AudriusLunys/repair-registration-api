@@ -44,12 +44,12 @@ public class RepairOrderService {
 
     private void checkCustomerInDatabase(RepairOrder repairOrder) {
         List<Customer> customersFromDb = customerService.findAll();
-        var a = customersFromDb.stream().filter(customer -> customer.getFirstName().equalsIgnoreCase(repairOrder.getCustomer().getFirstName()) &&
+        var checkedCustomers = customersFromDb.stream().filter(customer -> customer.getFirstName().equalsIgnoreCase(repairOrder.getCustomer().getFirstName()) &&
                         customer.getLastName().equalsIgnoreCase(repairOrder.getCustomer().getLastName()) &&
                         customer.getEmail().equalsIgnoreCase(repairOrder.getCustomer().getEmail()) &&
                         customer.getTelNumber().equalsIgnoreCase(repairOrder.getCustomer().getTelNumber()))
                 .collect(Collectors.toList());
-        if (a.isEmpty()) {
+        if (checkedCustomers.isEmpty()) {
             Customer customer = new Customer();
             customer.setFirstName(repairOrder.getCustomer().getFirstName());
             customer.setLastName(repairOrder.getCustomer().getLastName());
@@ -57,7 +57,7 @@ public class RepairOrderService {
             customer.setTelNumber(repairOrder.getCustomer().getTelNumber());
             repairOrder.setCustomer(customer);
         } else {
-            repairOrder.setCustomer(a.get(0));
+            repairOrder.setCustomer(checkedCustomers.get(0));
         }
     }
 }
