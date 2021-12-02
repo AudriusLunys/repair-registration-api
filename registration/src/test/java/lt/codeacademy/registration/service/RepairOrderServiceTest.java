@@ -1,5 +1,11 @@
 package lt.codeacademy.registration.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -15,17 +21,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @ContextConfiguration(classes = {RepairOrderService.class})
 @ExtendWith(SpringExtension.class)
 class RepairOrderServiceTest {
-
     @MockBean
     private CustomerService customerService;
 
@@ -37,8 +35,6 @@ class RepairOrderServiceTest {
 
     @Autowired
     private RepairOrderService repairOrderService;
-
-
 
     @Test
     void testSaveRepairOrder() {
@@ -248,6 +244,5 @@ class RepairOrderServiceTest {
         assertSame(customer2, repairOrder1.getCustomer());
         assertEquals(1L, repairOrder1.getRegistrationNr().longValue());
     }
-
-
 }
+

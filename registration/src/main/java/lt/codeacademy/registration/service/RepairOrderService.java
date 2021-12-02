@@ -32,6 +32,17 @@ public class RepairOrderService {
     }
 
     public RepairOrder saveRepairOrder(RepairOrder repairOrder) {
+        checkCustomerInDatabase(repairOrder);
+        repairOrder.setRegistrationNr(generationService.generate());
+        repairOrder.setRegistrationDate(LocalDate.now());
+        return repairOrderRepository.save(repairOrder);
+    }
+
+    public void deleteOrder(Long registrationNr) {
+        repairOrderRepository.deleteByRegistrationNr(registrationNr);
+    }
+
+    private void checkCustomerInDatabase(RepairOrder repairOrder) {
         List<Customer> customersFromDb = customerService.findAll();
         var a = customersFromDb.stream().filter(customer -> customer.getFirstName().equalsIgnoreCase(repairOrder.getCustomer().getFirstName()) &&
                         customer.getLastName().equalsIgnoreCase(repairOrder.getCustomer().getLastName()) &&
@@ -48,12 +59,5 @@ public class RepairOrderService {
         } else {
             repairOrder.setCustomer(a.get(0));
         }
-        repairOrder.setRegistrationNr(generationService.generate());
-        repairOrder.setRegistrationDate(LocalDate.now());
-        return repairOrderRepository.save(repairOrder);
-    }
-
-    public void deleteOrder(Long registrationNr) {
-        repairOrderRepository.deleteByRegistrationNr(registrationNr);
     }
 }
