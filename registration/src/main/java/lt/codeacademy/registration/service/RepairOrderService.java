@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lt.codeacademy.registration.model.Customer;
 import lt.codeacademy.registration.model.RepairOrder;
 import lt.codeacademy.registration.repository.RepairOrderRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,6 +27,10 @@ public class RepairOrderService {
 
     public List<RepairOrder> findAll() {
         return repairOrderRepository.findAll();
+    }
+
+    public Page<RepairOrder> getOrdersPaginated(Pageable pageable) {
+        return repairOrderRepository.findAll(pageable);
     }
 
     public Optional<RepairOrder> findByRegistrationNr(Long registrationNr) {
