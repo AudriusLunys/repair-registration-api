@@ -18,7 +18,9 @@ public class OrderConfirmationEmailService {
         message.setFrom("repairprojektas@gmail.com");
         message.setTo(repairOrder.getCustomer().getEmail());
         message.setSubject("Repair ChopShop Registration Confirmation");
-        message.setText("Hello, This is  your registration order details" + "\n" +
+        message.setText("Hello," + repairOrder.getCustomer().getFirstName() + ""
+                + repairOrder.getCustomer().getLastName() + ""
+                + "This is  your registration order details" + "\n" +
                 "Order number: " + repairOrder.getRegistrationNr() + "\n" +
                 "Registration date: " + repairOrder.getRegistrationDate() + "\n" +
                 "Device: " + repairOrder.getDevice().getManufacturer() + " " + repairOrder.getDevice().getModel() + "\n" +
