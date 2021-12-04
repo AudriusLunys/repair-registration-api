@@ -3,7 +3,7 @@ package lt.codeacademy.registration.controller;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.registration.model.RepairOrder;
-import lt.codeacademy.registration.service.OrderConfirmationEmailService;
+import lt.codeacademy.registration.service.email.OrderConfirmationEmailService;
 import lt.codeacademy.registration.service.RepairOrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
