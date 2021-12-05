@@ -6,13 +6,13 @@ import lt.codeacademy.registration.model.RepairOrder;
 import lt.codeacademy.registration.repository.RepairOrderRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 
@@ -26,7 +26,7 @@ public class RepairOrderService {
     private final CustomerService customerService;
 
     public List<RepairOrder> findAll() {
-        return repairOrderRepository.findAll();
+        return repairOrderRepository.findAll(Sort.by(Sort.Direction.DESC, "registrationDate"));
     }
 
     public Page<RepairOrder> getOrdersPaginated(Pageable pageable) {

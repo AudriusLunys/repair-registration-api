@@ -15,7 +15,7 @@ INSERT INTO CUSTOMERS (uuid, first_name, last_name, email, tel_number) VALUES
 
 INSERT INTO REPAIR_ORDERS(registration_nr, registration_date, customer_id, device_id) VALUES
 (123456, '2019-03-01',5,1),
-(123478, '2021-12-11',1,2),
+(123478, '2021-12-01',1,2),
 (123756, '2020-08-15',2,3),
 (123757, '2021-09-16',3,4),
 (123758, '2021-08-15',4,5);
