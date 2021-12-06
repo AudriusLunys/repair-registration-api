@@ -48,14 +48,9 @@ public class RepairOrderService {
         repairOrderRepository.deleteByRegistrationNr(registrationNr);
     }
 
-    private void checkCustomerInDatabase(RepairOrder repairOrder) {
-        List<Customer> customersFromDb = customerService.findAll();
-        var checkedCustomers = customersFromDb.stream().filter(customer -> customer.getFirstName().equalsIgnoreCase(repairOrder.getCustomer().getFirstName()) &&
-                        customer.getLastName().equalsIgnoreCase(repairOrder.getCustomer().getLastName()) &&
-                        customer.getEmail().equalsIgnoreCase(repairOrder.getCustomer().getEmail()) &&
-                        customer.getTelNumber().equalsIgnoreCase(repairOrder.getCustomer().getTelNumber()))
-                .collect(Collectors.toList());
-        if (checkedCustomers.isEmpty()) {
+        private void checkCustomerInDatabase(RepairOrder repairOrder) {
+            List<Customer> checkedCustomers = getCustomers(repairOrder);
+            if (checkedCustomers.isEmpty()) {
             Customer customer = new Customer();
             customer.setFirstName(repairOrder.getCustomer().getFirstName());
             customer.setLastName(repairOrder.getCustomer().getLastName());
@@ -66,4 +61,15 @@ public class RepairOrderService {
             repairOrder.setCustomer(checkedCustomers.get(0));
         }
     }
+
+    private List<Customer> getCustomers(RepairOrder repairOrder) {
+        List<Customer> customersFromDb = customerService.findAll();
+        var checkedCustomers = customersFromDb.stream().filter(customer -> customer.getFirstName().equalsIgnoreCase(repairOrder.getCustomer().getFirstName()) &&
+                        customer.getLastName().equalsIgnoreCase(repairOrder.getCustomer().getLastName()) &&
+                        customer.getEmail().equalsIgnoreCase(repairOrder.getCustomer().getEmail()) &&
+                        customer.getTelNumber().equalsIgnoreCase(repairOrder.getCustomer().getTelNumber()))
+                .collect(Collectors.toList());
+        return checkedCustomers;
+    }
+
 }
