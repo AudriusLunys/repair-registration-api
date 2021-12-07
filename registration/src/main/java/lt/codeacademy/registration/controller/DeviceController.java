@@ -2,6 +2,7 @@ package lt.codeacademy.registration.controller;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.registration.exception.DeviceNotFoundException;
 import lt.codeacademy.registration.model.Device;
 import lt.codeacademy.registration.service.DeviceService;
 import org.springframework.http.HttpStatus;
@@ -46,7 +47,12 @@ public class DeviceController {
     @PutMapping("/device/{uuid}")
     @ApiOperation(value = "Update device ", httpMethod = "PUT")
     public ResponseEntity<Void> updateProduct(@PathVariable UUID uuid, @Valid @RequestBody Device device) {
-        deviceService.saveDevice(device);
+        Device deviceFromDB = deviceService.findByUuid(uuid).orElseThrow(DeviceNotFoundException::new);
+        deviceFromDB.setModel(device.getModel());
+        deviceFromDB.setManufacturer(device.getManufacturer());
+        deviceFromDB.setFailureDescription(device.getFailureDescription());
+        deviceFromDB.setSerialNumber(device.getSerialNumber());
+        deviceService.saveDevice(deviceFromDB);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
