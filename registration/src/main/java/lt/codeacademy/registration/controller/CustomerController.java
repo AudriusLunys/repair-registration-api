@@ -37,6 +37,7 @@ public class CustomerController {
     @PostMapping("/customer")
     @ApiOperation(value = "Create customer", httpMethod = "POST")
     public ResponseEntity<Void> createCustomer(@Valid @RequestBody Customer customer) {
+        customer.setUuid(UUID.randomUUID());
         customerService.saveCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

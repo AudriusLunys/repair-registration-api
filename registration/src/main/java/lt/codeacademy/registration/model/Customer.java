@@ -27,7 +27,7 @@ public class Customer {
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private UUID uuid = UUID.randomUUID();
+    private UUID uuid;
 
     @NotNull
     @NotBlank

@@ -38,6 +38,7 @@ public class DeviceController {
     @PostMapping("/device")
     @ApiOperation(value = "Create device", httpMethod = "POST")
     public ResponseEntity<Void> createDevice(@Valid @RequestBody Device device) {
+        device.setUuid(UUID.randomUUID());
         deviceService.saveDevice(device);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
