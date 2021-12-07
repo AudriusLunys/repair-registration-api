@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 @Getter
@@ -29,18 +30,22 @@ public class Device {
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private UUID uuid =UUID.randomUUID();
+    private UUID uuid ;
 
     @NotNull
+    @NotBlank
     private String manufacturer;
 
     @NotNull
+    @NotBlank
     private String model;
 
     @NotNull
+    @NotBlank
     private String serialNumber;
 
     @NotNull
+    @NotBlank
     private String failureDescription;
 
 }

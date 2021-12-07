@@ -2,6 +2,7 @@ package lt.codeacademy.registration.controller;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.registration.exception.CustomerNotFoundException;
 import lt.codeacademy.registration.model.Customer;
 import lt.codeacademy.registration.service.CustomerService;
 import org.springframework.http.HttpStatus;
@@ -37,13 +38,19 @@ public class CustomerController {
     @PostMapping("/customer")
     @ApiOperation(value = "Create customer", httpMethod = "POST")
     public ResponseEntity<Void> createCustomer(@Valid @RequestBody Customer customer) {
+        customer.setUuid(UUID.randomUUID());
         customerService.saveCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @PutMapping("/customer/{uuid}")
     @ApiOperation(value = "Update customer ", httpMethod = "PUT")
     public ResponseEntity<Void> updateCustomer(@PathVariable UUID uuid, @Valid @RequestBody Customer customer) {
-        customerService.saveCustomer(customer);
+        Customer customerinDB = customerService.findByUuid(uuid).orElseThrow(CustomerNotFoundException::new);
+        customerinDB.setFirstName(customer.getFirstName());
+        customerinDB.setLastName(customer.getLastName());
+        customerinDB.setEmail(customer.getEmail());
+        customerinDB.setTelNumber(customer.getTelNumber());
+        customerService.saveCustomer(customerinDB);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @DeleteMapping("/customer/{uuid}")

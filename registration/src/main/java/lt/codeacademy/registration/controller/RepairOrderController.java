@@ -3,7 +3,9 @@ package lt.codeacademy.registration.controller;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.registration.model.RepairOrder;
+import lt.codeacademy.registration.service.email.OrderConfirmationEmailService;
 import lt.codeacademy.registration.service.RepairOrderService;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +16,14 @@ import java.util.List;
 import java.util.Optional;
 
 
-@CrossOrigin(origins="http://localhost:3000")
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
 public class RepairOrderController {
 
     private final RepairOrderService repairOrderService;
+    private final OrderConfirmationEmailService emailService;
 
     @GetMapping(value = "/order", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Get list of registered repair orders", httpMethod = "GET")
@@ -40,6 +43,7 @@ public class RepairOrderController {
     @ApiOperation(value = "Create repair order", httpMethod = "POST")
     public ResponseEntity<Void> createRepairOrder(@Valid @RequestBody RepairOrder repairOrder) {
         repairOrderService.saveRepairOrder(repairOrder);
+        emailService.sendEmail(repairOrder);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
